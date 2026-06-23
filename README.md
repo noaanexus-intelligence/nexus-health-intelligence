@@ -136,7 +136,12 @@ nexus-health-intelligence/
 - ทำงานเฉพาะไฟล์ในโฟลเดอร์ `nexus-health-intelligence` เท่านั้น
 - ใช้พอร์ต **4174** สำหรับ local (4173 สงวนไว้ให้เว็บ HDC เดิม)
 
-> 📌 **สถานะ:** ยัง **ไม่ได้ commit / push / สร้าง repo** ใด ๆ — รอคำสั่งจากผู้ใช้ก่อนเสมอ
+> 📌 **สถานะ:** ตั้ง Git repository แล้ว, push ขึ้น GitHub repo `noaanexus-intelligence/nexus-health-intelligence` แล้ว, ยังไม่ได้ deploy
+>
+> - Initial commit: `a649737 — Initial Nexus Health Intelligence landing page`
+> - Remote: `https://github.com/noaanexus-intelligence/nexus-health-intelligence.git`
+> - Branch: `main`
+> - Deployment: ยังไม่ได้ deploy
 
 ---
 
