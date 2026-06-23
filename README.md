@@ -143,6 +143,12 @@ nexus-health-intelligence/
 > - Branch: `main`
 > - Deployment: ยังไม่ได้ deploy
 
+### 🚀 Vercel Deployment Configuration
+
+- เพิ่ม `vercel.json` สำหรับ Vercel deployment configuration
+- มี security headers เบื้องต้น (CSP, X-Frame-Options, Referrer-Policy ฯลฯ)
+- ยังไม่ได้ deploy
+
 ---
 
 ## 📞 ติดต่อ
