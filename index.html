@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0F766E" />
+  <meta name="color-scheme" content="light" />
+
+  <title>Nexus Health Intelligence | ระบบอัจฉริยะเพื่อบริหารข้อมูลสุขภาพระดับพื้นที่</title>
+  <meta name="description" content="พัฒนา Dashboard, HDC Analytics, KPI Monitoring และ Health Data Intelligence สำหรับ สสอ., CUP, โรงพยาบาลชุมชน และหน่วยบริการปฐมภูมิ" />
+  <meta name="keywords" content="HDC, Health Data Intelligence, KPI กระทรวงสาธารณสุข, Service Plan, 43 แฟ้ม, FDH, eClaim, Dashboard, สสอ, CUP, รพ.สต., Data Governance" />
+  <meta name="author" content="Nexus Health Intelligence" />
+  <meta name="application-name" content="Nexus Health Intelligence" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="th_TH" />
+  <meta property="og:site_name" content="Nexus Health Intelligence" />
+  <meta property="og:title" content="Nexus Health Intelligence | ระบบอัจฉริยะเพื่อบริหารข้อมูลสุขภาพระดับพื้นที่" />
+  <meta property="og:description" content="เปลี่ยนข้อมูล HDC ให้เป็น Insight สำหรับผู้บริหารสาธารณสุขระดับพื้นที่ — Dashboard, KPI Analytics และ Health Data Intelligence" />
+  <!-- หมายเหตุ: ตั้งค่า og:url และ og:image (ภาพ 1200x630) ตอน deploy จริง -->
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nexus Health Intelligence | ระบบอัจฉริยะเพื่อบริหารข้อมูลสุขภาพระดับพื้นที่" />
+  <meta name="twitter:description" content="Health Data Intelligence สำหรับ สสอ., CUP, รพช. และหน่วยบริการปฐมภูมิ — HDC, 43 แฟ้ม, KPI, Service Plan" />
+
+  <!-- Inline SVG favicon (no extra file / no extra request) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F766E'/%3E%3Cpath d='M5 16h4l3 8 4-16 3 8h5' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Structured data: Organization (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Nexus Health Intelligence",
+    "alternateName": "เน็กซัส เฮลท์ อินเทลลิเจนซ์",
+    "description": "Health Data Intelligence Company สำหรับหน่วยงานสาธารณสุขไทย — พัฒนา Dashboard, HDC Analytics, KPI Monitoring และระบบวิเคราะห์ข้อมูลสุขภาพระดับพื้นที่",
+    "email": "noaanoaa212224@gmail.com",
+    "telephone": "+66959075564",
+    "areaServed": "TH",
+    "knowsAbout": ["HDC", "43 แฟ้ม", "KPI กระทรวงสาธารณสุข", "Service Plan", "FDH", "eClaim", "Health Dashboard", "Data Governance"],
+    "slogan": "ระบบอัจฉริยะเพื่อบริหารข้อมูลสุขภาพระดับพื้นที่"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+  <!-- ===== Reusable SVG icon sprite (hidden) ===== -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <defs>
+      <symbol id="i-activity" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+      <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+      <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 9.5"/></symbol>
+      <symbol id="i-trending" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+      <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+      <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+      <symbol id="i-phone-app" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+      <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
+      <symbol id="i-arrow-up" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></symbol>
+      <symbol id="i-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+      <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></symbol>
+      <symbol id="i-merge" viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></symbol>
+      <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+      <symbol id="i-server" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+      <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- ===== Navbar ===== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="brand" aria-label="Nexus Health Intelligence หน้าแรก">
+        <span class="brand-mark" aria-hidden="true">
+          <svg class="icon"><use href="#i-activity"/></svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">Nexus Health Intelligence</span>
+          <span class="brand-sub">เน็กซัส เฮลท์ อินเทลลิเจนซ์</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="เมนูหลัก">
+        <ul class="nav-list" id="nav-list">
+          <li><a href="#services" class="nav-link">บริการ</a></li>
+          <li><a href="#solution" class="nav-link">โซลูชัน</a></li>
+          <li><a href="#case-study" class="nav-link">Case Study</a></li>
+          <li><a href="#security" class="nav-link">Data Security</a></li>
+          <li><a href="#pricing" class="nav-link">แพ็กเกจ</a></li>
+          <li><a href="#contact" class="nav-link">ติดต่อเรา</a></li>
+          <li class="nav-cta-mobile"><a href="#contact" class="btn btn-primary btn-sm">ปรึกษาโครงการ</a></li>
+        </ul>
+      </nav>
+
+      <a href="#contact" class="btn btn-primary btn-sm nav-cta">ปรึกษาโครงการ</a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="nav-list">
+        <svg class="icon icon-menu"><use href="#i-menu"/></svg>
+        <svg class="icon icon-close"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow"><svg class="icon"><use href="#i-activity"/></svg> Health Data Intelligence Company</span>
+          <h1>เปลี่ยนข้อมูล HDC ให้เป็น Insight สำหรับผู้บริหารสาธารณสุขระดับพื้นที่</h1>
+          <p class="hero-desc">
+            เราออกแบบและพัฒนาระบบ Dashboard, KPI Analytics และ Health Data Intelligence
+            สำหรับ สสอ., CUP, โรงพยาบาลชุมชน และหน่วยบริการปฐมภูมิ โดยเชื่อมโยงข้อมูลจาก
+            HDC, 43 แฟ้ม, KPI และ Service Plan ให้กลายเป็นข้อมูลเชิงบริหารที่ใช้งานได้จริง
+          </p>
+          <div class="hero-actions">
+            <a href="#case-study" class="btn btn-primary">ดูกรณีศึกษา</a>
+            <a href="#contact" class="btn btn-ghost">ปรึกษาโครงการ Dashboard</a>
+          </div>
+          <p class="hero-tagline">ระบบอัจฉริยะเพื่อบริหารข้อมูลสุขภาพระดับพื้นที่</p>
+        </div>
+
+        <div class="hero-stats reveal">
+          <div class="stat-card">
+            <div class="stat-icon"><svg class="icon"><use href="#i-file"/></svg></div>
+            <div class="stat-num">40</div>
+            <div class="stat-label">หมวดรายงานมาตรฐาน</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><svg class="icon"><use href="#i-layers"/></svg></div>
+            <div class="stat-num">17</div>
+            <div class="stat-label">สาขา Service Plan</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><svg class="icon"><use href="#i-users"/></svg></div>
+            <div class="stat-num">24</div>
+            <div class="stat-label">หน่วยบริการ</div>
+          </div>
+          <div class="stat-card stat-card--accent">
+            <div class="stat-icon"><svg class="icon"><use href="#i-zap"/></svg></div>
+            <div class="stat-num stat-num--text">Hybrid</div>
+            <div class="stat-label">Snapshot + Live</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust strip -->
+      <div class="container">
+        <div class="trust-strip reveal" aria-label="บริบทข้อมูลสุขภาพที่เราเชี่ยวชาญ">
+          <span class="trust-label"><svg class="icon"><use href="#i-shield-check"/></svg> เราเข้าใจระบบข้อมูลสุขภาพไทย</span>
+          <ul class="trust-chips">
+            <li>HDC</li>
+            <li>43 แฟ้ม</li>
+            <li>FDH / eClaim</li>
+            <li>KPI กระทรวงสาธารณสุข</li>
+            <li>Service Plan 17 สาขา</li>
+            <li>CUP</li>
+            <li>สสอ.</li>
+            <li>รพ.สต.</li>
+            <li>โรงพยาบาลชุมชน</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Why Nexus / Capability (Trust) ===== -->
+    <section class="section" id="why" aria-labelledby="why-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Why Nexus</span>
+          <h2 id="why-title">เข้าใจบริบทสาธารณสุขไทยอย่างลึกซึ้ง ไม่ใช่เพียงการพัฒนาระบบทั่วไป</h2>
+          <p class="section-lead">เรารวมความเชี่ยวชาญด้านเทคโนโลยีเข้ากับความเข้าใจระบบข้อมูลสุขภาพระดับพื้นที่</p>
+        </div>
+        <div class="grid grid-4">
+          <article class="card cap-card reveal">
+            <div class="card-icon"><svg class="icon"><use href="#i-globe"/></svg></div>
+            <h3>เข้าใจบริบทสาธารณสุขไทย</h3>
+            <p>ออกแบบจากการทำงานร่วมกับ สสอ., CUP, รพช. และ รพ.สต. โดยตรง ไม่ใช่รูปแบบสำเร็จทั่วไป</p>
+          </article>
+          <article class="card cap-card reveal">
+            <div class="card-icon"><svg class="icon"><use href="#i-database"/></svg></div>
+            <h3>เชี่ยวชาญข้อมูล HDC</h3>
+            <p>เข้าใจโครงสร้าง HDC, 43 แฟ้ม, FDH/eClaim, KPI Template และ Service Plan</p>
+          </article>
+          <article class="card cap-card reveal">
+            <div class="card-icon"><svg class="icon"><use href="#i-target"/></svg></div>
+            <h3>ออกแบบเพื่อการบริหาร</h3>
+            <p>เปลี่ยนข้อมูลเป็น Insight ที่ผู้บริหารใช้ตัดสินใจและติดตามงานได้ทันที</p>
+          </article>
+          <article class="card cap-card reveal">
+            <div class="card-icon"><svg class="icon"><use href="#i-shield-check"/></svg></div>
+            <h3>Security &amp; Governance</h3>
+            <p>ยึดหลัก aggregated data, privacy by design และการกำกับดูแลข้อมูลที่เหมาะสม</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Problem ===== -->
+    <section class="section section-alt" id="problem">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Problem</span>
+          <h2>ข้อมูลสุขภาพมีมาก แต่ใช้บริหารได้ยาก</h2>
+          <p class="section-lead">ทีมงานในพื้นที่มีข้อมูลครบ แต่การแปลงข้อมูลให้เป็นการตัดสินใจยังเป็นงานหนักทุกเดือน</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card problem-card reveal">
+            <div class="card-icon icon-warn"><svg class="icon"><use href="#i-file"/></svg></div>
+            <h3>รายงาน HDC จำนวนมาก ดูภาพรวมได้ยาก</h3>
+            <p>HDC มีรายงานจำนวนมาก แต่ดูภาพรวมระดับอำเภอได้ยาก ต้องไล่เปิดทีละหมวด</p>
+          </article>
+          <article class="card problem-card reveal">
+            <div class="card-icon icon-warn"><svg class="icon"><use href="#i-layers"/></svg></div>
+            <h3>KPI กระจายหลายหมวด</h3>
+            <p>KPI และ Service Plan กระจายอยู่หลายหมวด ทำให้ติดตามผลรวมในภาพเดียวได้ยาก</p>
+          </article>
+          <article class="card problem-card reveal">
+            <div class="card-icon icon-warn"><svg class="icon"><use href="#i-monitor"/></svg></div>
+            <h3>ต้องเปิดหลายหน้าจอ</h3>
+            <p>ผู้บริหารต้องเปิดหลายหน้าจอเพื่อดูข้อมูลรายหน่วยบริการ เสียเวลาในการรวบรวม</p>
+          </article>
+          <article class="card problem-card reveal">
+            <div class="card-icon icon-warn"><svg class="icon"><use href="#i-target"/></svg></div>
+            <h3>ไม่ทราบล่วงหน้าว่าตัวชี้วัดใดมีความเสี่ยง</h3>
+            <p>ไม่สามารถทราบได้ในทันทีว่าตัวชี้วัดใดมีความเสี่ยงไม่บรรลุเป้าหมาย จนกว่าจะใกล้สิ้นปีงบประมาณจึงจะทราบ</p>
+          </article>
+          <article class="card problem-card reveal">
+            <div class="card-icon icon-warn"><svg class="icon"><use href="#i-alert"/></svg></div>
+            <h3>ข้อมูล 43 แฟ้มผิดพลาด</h3>
+            <p>ความผิดพลาดของข้อมูล 43 แฟ้ม อาจทำให้ผลการดำเนินงานที่ปรากฏต่ำกว่าความเป็นจริง</p>
+          </article>
+          <article class="card problem-card reveal">
+            <div class="card-icon icon-warn"><svg class="icon"><use href="#i-chart"/></svg></div>
+            <h3>ขาดระบบสรุป Insight</h3>
+            <p>ขาดระบบสรุป insight สำหรับการประชุมและติดตามงาน ต้องทำสไลด์ใหม่ทุกครั้ง</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Solution ===== -->
+    <section class="section" id="solution">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Solution</span>
+          <h2>Health Data Intelligence Platform สำหรับสาธารณสุขระดับพื้นที่</h2>
+          <p class="section-lead">
+            ระบบรวมข้อมูลจาก HDC, KPI Template, Service Plan และข้อมูลรายหน่วยบริการเข้าด้วยกันในหน้าเดียว
+            เพื่อช่วยให้ผู้บริหารดูภาพรวม วิเคราะห์ Gap จัดอันดับหน่วยบริการ และติดตามคุณภาพข้อมูลได้รวดเร็วขึ้น
+          </p>
+        </div>
+
+        <ol class="timeline" aria-label="ขั้นตอนการทำงานของระบบ">
+          <li class="timeline-step reveal">
+            <span class="timeline-dot"><svg class="icon"><use href="#i-database"/></svg></span>
+            <h3>1. รวบรวมข้อมูล</h3>
+            <p>ดึงรายงาน HDC, 43 แฟ้ม, FDH/eClaim, KPI Template และ Service Plan มาไว้ที่เดียว</p>
+          </li>
+          <li class="timeline-step reveal">
+            <span class="timeline-dot"><svg class="icon"><use href="#i-layers"/></svg></span>
+            <h3>2. จัดโครงสร้าง</h3>
+            <p>ทำ Crosswalk และจัดหมวดให้ข้อมูลเชื่อมโยงกัน พร้อมระบบ Snapshot</p>
+          </li>
+          <li class="timeline-step reveal">
+            <span class="timeline-dot"><svg class="icon"><use href="#i-trending"/></svg></span>
+            <h3>3. วิเคราะห์</h3>
+            <p>คำนวณ Gap, Trend และ Ranking รายหน่วยบริการ พร้อมเตือนคุณภาพข้อมูล</p>
+          </li>
+          <li class="timeline-step reveal">
+            <span class="timeline-dot"><svg class="icon"><use href="#i-cpu"/></svg></span>
+            <h3>4. นำเสนอ Insight</h3>
+            <p>สรุปเป็น Executive Brief และ Dashboard ที่พร้อมใช้ในการประชุมติดตามงาน</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Data Architecture: Snapshot + Live ===== -->
+    <section class="section section-arch" id="architecture" aria-labelledby="arch-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Architecture</span>
+          <h2 id="arch-title">Snapshot + Live Data Architecture</h2>
+          <p class="section-lead">โหลดเร็วด้วย Snapshot แต่ยังดึงข้อมูลสดจาก HDC ได้เมื่อจำเป็น พร้อม Fallback อัตโนมัติ</p>
+        </div>
+
+        <div class="arch reveal">
+          <div class="arch-node">
+            <div class="arch-ic"><svg class="icon"><use href="#i-database"/></svg></div>
+            <h3>แหล่งข้อมูล</h3>
+            <p>HDC · 43 แฟ้ม · FDH/eClaim · KPI Template</p>
+          </div>
+          <div class="arch-arrow" aria-hidden="true"><svg class="icon"><use href="#i-arrow-right"/></svg><span>ดึงตามรอบ</span></div>
+          <div class="arch-node arch-node--snap">
+            <div class="arch-ic"><svg class="icon"><use href="#i-layers"/></svg></div>
+            <h3>Snapshot Store</h3>
+            <p>ข้อมูล aggregated พร้อมใช้ โหลดเร็ว ลดการเรียก API</p>
+            <span class="badge badge-soft">Snapshot-first</span>
+          </div>
+          <div class="arch-arrow" aria-hidden="true"><svg class="icon"><use href="#i-arrow-right"/></svg><span>แสดงผล</span></div>
+          <div class="arch-node arch-node--dash">
+            <div class="arch-ic"><svg class="icon"><use href="#i-monitor"/></svg></div>
+            <h3>Dashboard</h3>
+            <p>KPI · Gap · Ranking · Executive Brief</p>
+            <span class="badge badge-soft">Live on-demand</span>
+          </div>
+        </div>
+
+        <p class="arch-fallback reveal">
+          <svg class="icon"><use href="#i-refresh"/></svg>
+          <span><strong>Fallback อัตโนมัติ:</strong> หากระบบ HDC ต้นทางไม่สามารถใช้งานได้ชั่วคราว ระบบจะแสดงข้อมูล Snapshot ล่าสุดโดยอัตโนมัติ เพื่อให้ Dashboard ยังใช้งานได้ต่อเนื่อง</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Core Services ===== -->
+    <section class="section section-alt" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Core Services</span>
+          <h2>บริการหลักของเรา</h2>
+          <p class="section-lead">ครอบคลุมตั้งแต่การเชื่อมข้อมูล ไปจนถึงรายงานสรุปสำหรับผู้บริหาร</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card service-card reveal">
+            <div class="card-icon"><svg class="icon"><use href="#i-monitor"/></svg></div>
+            <h3>Health Dashboard Development</h3>
+            <p>พัฒนา Dashboard สำหรับ สสอ., CUP, โรงพยาบาลชุมชน และหน่วยบริการปฐมภูมิ</p>
+          </article>
+          <article class="card service-card reveal">
+            <div class="card-icon"><svg class="icon"><use href="#i-database"/></svg></div>
+            <h3>HDC Data Integration</h3>
+            <p>เชื่อมข้อมูลรายงาน HDC, 43 แฟ้ม, FDH/eClaim และจัดโครงสร้างให้ใช้งานง่ายในระดับพื้นที่</p>
+          </article>
+          <article class="card service-card reveal">
+            <div class="card-icon"><svg class="icon"><use href="#i-trending"/></svg></div>
+            <h3>KPI &amp; Service Plan Analytics</h3>
+            <p>วิเคราะห์เป้าหมาย ผลงาน Gap Trend และ Ranking รายหน่วยบริการ ครบ 17 สาขา</p>
+          </article>
+          <article class="card service-card reveal">
+            <div class="card-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
+            <h3>Data Quality Monitoring</h3>
+            <p>ตรวจสอบคุณภาพข้อมูล 43 แฟ้ม เช่น PERSON, SERVICE, DIAG, EPI, PROCED, DENTAL</p>
+          </article>
+          <article class="card service-card reveal">
+            <div class="card-icon"><svg class="icon"><use href="#i-cpu"/></svg></div>
+            <h3>AI Executive Report</h3>
+            <p>สร้างรายงานสรุปผู้บริหาร รายเดือน รายไตรมาส หรือก่อนประชุมติดตามงาน</p>
+          </article>
+          <article class="card service-card service-card--cta reveal">
+            <div class="card-icon"><svg class="icon"><use href="#i-chat"/></svg></div>
+            <h3>ออกแบบระบบเฉพาะหน่วยงาน</h3>
+            <p>ต้องการระบบเฉพาะบริบทพื้นที่ของท่าน? เราออกแบบและพัฒนาให้เหมาะกับงานจริง</p>
+            <a href="#contact" class="link-arrow">ออกแบบระบบ Health Data Intelligence <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Case Study / Product Preview ===== -->
+    <section class="section" id="case-study">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Case Study</span>
+          <h2>Pakchong HDC Intelligence Dashboard</h2>
+          <p class="section-lead">
+            ตัวอย่างงาน Health Data Intelligence Dashboard ระดับอำเภอปากช่อง จังหวัดนครราชสีมา
+            รองรับรายงานมาตรฐานครบทุกหมวด ส่งเสริมป้องกันครบ 8 หมวด Service Plan 17 สาขา KPI 2569 Crosswalk
+            พร้อมระบบ Hybrid Snapshot + Live Data เพื่อให้ Dashboard โหลดเร็ว แต่ยังดึงข้อมูลสดจาก HDC ได้เมื่อจำเป็น
+          </p>
+        </div>
+
+        <div class="case-grid">
+          <!-- Mock dashboard preview -->
+          <div class="dashboard-preview reveal" role="img" aria-label="ตัวอย่างหน้าจอ Dashboard วิเคราะห์ข้อมูล HDC (ข้อมูลตัวอย่าง)">
+            <div class="dash-bar">
+              <div class="dash-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="dash-title"><svg class="icon"><use href="#i-activity"/></svg> Pakchong HDC Intelligence</div>
+              <div class="dash-badges">
+                <span class="badge badge-live"><span class="dot-live" aria-hidden="true"></span> Snapshot + Live</span>
+              </div>
+            </div>
+            <div class="dash-body">
+              <div class="dash-toolbar">
+                <span class="badge badge-soft"><svg class="icon"><use href="#i-cpu"/></svg> HDC Intelligence</span>
+                <span class="dash-meta">ข้อมูลตัวอย่างเพื่อการสาธิต</span>
+              </div>
+
+              <div class="dash-kpis">
+                <div class="kpi-tile">
+                  <div class="kpi-top"><span>ANC คุณภาพ 5 ครั้ง</span><span class="trend up">▲</span></div>
+                  <div class="kpi-value">82.4<span class="unit">%</span></div>
+                  <div class="kpi-bar"><i style="width:82%"></i></div>
+                </div>
+                <div class="kpi-tile">
+                  <div class="kpi-top"><span>DM คุมระดับน้ำตาล</span><span class="trend up">▲</span></div>
+                  <div class="kpi-value">61.8<span class="unit">%</span></div>
+                  <div class="kpi-bar warn"><i style="width:62%"></i></div>
+                </div>
+                <div class="kpi-tile">
+                  <div class="kpi-top"><span>HT คุมความดัน</span><span class="trend down">▼</span></div>
+                  <div class="kpi-value">54.2<span class="unit">%</span></div>
+                  <div class="kpi-bar danger"><i style="width:54%"></i></div>
+                </div>
+                <div class="kpi-tile">
+                  <div class="kpi-top"><span>วัคซีนเด็ก ครบตามเกณฑ์</span><span class="trend up">▲</span></div>
+                  <div class="kpi-value">90.1<span class="unit">%</span></div>
+                  <div class="kpi-bar"><i style="width:90%"></i></div>
+                </div>
+              </div>
+
+              <div class="dash-table-wrap">
+                <div class="dash-table-head">
+                  <span><svg class="icon"><use href="#i-award"/></svg> Ranking หน่วยบริการ (KPI รวม)</span>
+                  <span class="badge badge-soft sm"><svg class="icon"><use href="#i-download"/></svg> CSV</span>
+                </div>
+                <table class="dash-table">
+                  <thead>
+                    <tr><th>หน่วยบริการ</th><th>ผ่านเกณฑ์</th><th>ผลงาน</th><th>สถานะ</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>รพ.สต. ตัวอย่าง A</td><td>34 / 40</td><td>88%</td><td><span class="pill ok">ผ่าน</span></td></tr>
+                    <tr><td>รพ.สต. ตัวอย่าง B</td><td>31 / 40</td><td>79%</td><td><span class="pill ok">ผ่าน</span></td></tr>
+                    <tr><td>รพ.สต. ตัวอย่าง C</td><td>26 / 40</td><td>66%</td><td><span class="pill warn">เฝ้าระวัง</span></td></tr>
+                    <tr><td>รพ.สต. ตัวอย่าง D</td><td>21 / 40</td><td>52%</td><td><span class="pill danger">เสี่ยง</span></td></tr>
+                  </tbody>
+                </table>
+                <p class="dash-note"><svg class="icon"><use href="#i-shield"/></svg> ข้อมูลแบบ aggregated — ไม่มี CID, HN หรือชื่อผู้ป่วยรายบุคคล</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Highlights -->
+          <div class="case-highlights reveal">
+            <h3>Case Study Highlights</h3>
+            <ul class="check-list">
+              <li><svg class="icon"><use href="#i-check"/></svg> HDC Intelligence Brief</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> KPI 2569 Crosswalk</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> Service Plan Analytics (17 สาขา)</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> รายงานมาตรฐานครบ 40 หมวด</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> ส่งเสริมป้องกันครบ 8 หมวด</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> Gap Analysis</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> Ranking หน่วยบริการ (24 หน่วย)</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> Data Quality Warning 43 แฟ้ม</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> Responsive Mobile</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> Hybrid Snapshot + Live Data</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> Fallback ไป Snapshot อัตโนมัติ</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Features ===== -->
+    <section class="section section-alt" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Features</span>
+          <h2>ความสามารถของแพลตฟอร์ม</h2>
+          <p class="section-lead">ออกแบบมาเพื่อให้ใช้งานได้จริงในบริบทสาธารณสุขไทย</p>
+        </div>
+        <div class="grid grid-feature">
+          <article class="feature reveal"><div class="card-icon sm"><svg class="icon"><use href="#i-database"/></svg></div><h3>HDC Integration</h3><p>เชื่อมรายงาน HDC อัตโนมัติ</p></article>
+          <article class="feature reveal"><div class="card-icon sm"><svg class="icon"><use href="#i-merge"/></svg></div><h3>KPI Crosswalk</h3><p>จับคู่ตัวชี้วัดข้ามหมวด</p></article>
+          <article class="feature reveal"><div class="card-icon sm"><svg class="icon"><use href="#i-layers"/></svg></div><h3>Service Plan Analytics</h3><p>วิเคราะห์ครบ 17 สาขา</p></article>
+          <article class="feature reveal"><div class="card-icon sm"><svg class="icon"><use href="#i-zap"/></svg></div><h3>Snapshot-first Dashboard</h3><p>โหลดเร็วด้วยข้อมูล Snapshot</p></article>
+          <article class="feature reveal"><div class="card-icon sm"><svg class="icon"><use href="#i-refresh"/></svg></div><h3>Live-on-demand Report</h3><p>ดึงข้อมูลสดเมื่อต้องการ</p></article>
+          <article class="feature reveal"><div class="card-icon sm"><svg class="icon"><use href="#i-alert"/></svg></div><h3>Data Quality Warning</h3><p>เตือนข้อมูล 43 แฟ้มผิดปกติ</p></article>
+          <article class="feature reveal"><div class="card-icon sm"><svg class="icon"><use href="#i-cpu"/></svg></div><h3>Executive Brief</h3><p>สรุปสำหรับผู้บริหารอัตโนมัติ</p></article>
+          <article class="feature reveal"><div class="card-icon sm"><svg class="icon"><use href="#i-phone-app"/></svg></div><h3>Mobile Responsive</h3><p>ใช้งานได้ทุกอุปกรณ์</p></article>
+          <article class="feature reveal"><div class="card-icon sm"><svg class="icon"><use href="#i-download"/></svg></div><h3>CSV Export</h3><p>ส่งออกข้อมูลไปใช้ต่อได้</p></article>
+          <article class="feature reveal"><div class="card-icon sm"><svg class="icon"><use href="#i-lock"/></svg></div><h3>Security-first Design</h3><p>ออกแบบโดยคำนึงถึงความปลอดภัย</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Data Security & Governance ===== -->
+    <section class="section" id="security">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Data Security &amp; Governance</span>
+          <h2>ออกแบบโดยคำนึงถึง Data Security และ Privacy</h2>
+          <p class="section-lead">ปกป้องข้อมูลสุขภาพตามหลัก privacy และมีแนวทางกำกับดูแลข้อมูล โดยไม่เปิดเผยข้อมูลผู้ป่วยรายบุคคล</p>
+        </div>
+
+        <div class="security-grid">
+          <div class="gov-cols reveal">
+            <div class="gov-col">
+              <h3 class="gov-head"><svg class="icon"><use href="#i-lock"/></svg> Data Security</h3>
+              <ul class="check-list">
+                <li><svg class="icon"><use href="#i-check"/></svg> ใช้ข้อมูล aggregated data</li>
+                <li><svg class="icon"><use href="#i-check"/></svg> ไม่แสดง CID, HN หรือชื่อผู้ป่วย</li>
+                <li><svg class="icon"><use href="#i-check"/></svg> ไม่แสดงข้อมูลผู้ป่วยรายบุคคล</li>
+                <li><svg class="icon"><use href="#i-check"/></svg> ใช้ HTTPS และ Security Headers</li>
+                <li><svg class="icon"><use href="#i-check"/></svg> ใช้ Snapshot เพื่อลดการเรียก API โดยไม่จำเป็น</li>
+              </ul>
+            </div>
+            <div class="gov-col">
+              <h3 class="gov-head"><svg class="icon"><use href="#i-book"/></svg> Data Governance</h3>
+              <ul class="check-list">
+                <li><svg class="icon"><use href="#i-check"/></svg> กำหนดสิทธิ์การเข้าถึงตามบทบาท (สสอ./CUP/หน่วยบริการ)</li>
+                <li><svg class="icon"><use href="#i-check"/></svg> แยกข้อมูลตามขอบเขตพื้นที่ที่รับผิดชอบ</li>
+                <li><svg class="icon"><use href="#i-check"/></svg> แนวทางคุณภาพและความถูกต้องของข้อมูล</li>
+                <li><svg class="icon"><use href="#i-check"/></svg> รองรับ Audit Log และ Monitoring ในอนาคต</li>
+                <li><svg class="icon"><use href="#i-check"/></svg> นโยบายการเก็บและใช้ข้อมูลที่โปร่งใส</li>
+              </ul>
+            </div>
+          </div>
+
+          <aside class="score-card reveal" aria-label="คะแนนความพร้อมด้านความปลอดภัยของข้อมูล 82 จาก 100">
+            <div class="score-ring" style="--score:82">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="ring-track" cx="60" cy="60" r="52" />
+                <circle class="ring-value" cx="60" cy="60" r="52" />
+              </svg>
+              <div class="score-center">
+                <span class="score-num">82</span>
+                <span class="score-den">/ 100</span>
+              </div>
+            </div>
+            <h3>Data Security Maturity</h3>
+            <p>เหมาะสำหรับ Dashboard ระดับหน่วยงาน โดยไม่เปิดเผยข้อมูลผู้ป่วยรายบุคคล</p>
+            <span class="badge badge-soft"><svg class="icon"><use href="#i-eye-off"/></svg> Privacy by design</span>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA band ===== -->
+    <section class="cta-band" aria-label="เริ่มต้นโครงการกับเรา">
+      <div class="container cta-inner reveal">
+        <div>
+          <h2>พร้อมออกแบบระบบ Health Data Intelligence ให้หน่วยงานของท่าน</h2>
+          <p>ตั้งแต่ HDC Dashboard, KPI Monitoring ไปจนถึง Executive Report — เราช่วยตั้งแต่วิเคราะห์ปัญหาจนถึงส่งมอบ</p>
+        </div>
+        <a href="#contact" class="btn btn-white">ปรึกษาโครงการ Dashboard</a>
+      </div>
+    </section>
+
+    <!-- ===== Pricing / Packages ===== -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="kicker">Packages</span>
+          <h2>แพ็กเกจที่ยืดหยุ่นตามขอบเขตงาน</h2>
+          <p class="section-lead">ทุกแพ็กเกจประเมินราคาตามขอบเขตจริง — ไม่มีค่าใช้จ่ายแอบแฝง</p>
+        </div>
+
+        <div class="grid grid-4 pricing-grid">
+          <article class="card price-card reveal">
+            <h3>Starter Dashboard</h3>
+            <p class="price-desc">เหมาะสำหรับหน่วยงานที่ต้องการ Dashboard พื้นฐาน</p>
+            <div class="price-tag">ประเมินราคาตามขอบเขตงาน</div>
+            <ul class="price-list">
+              <li><svg class="icon"><use href="#i-check"/></svg> Dashboard ภาพรวม</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> รายงานมาตรฐานหลัก</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> Responsive ทุกอุปกรณ์</li>
+            </ul>
+            <a href="#contact" class="btn btn-ghost btn-block">ขอใบเสนอราคา</a>
+          </article>
+
+          <article class="card price-card price-card--featured reveal">
+            <span class="ribbon">แนะนำ</span>
+            <h3>District Intelligence</h3>
+            <p class="price-desc">เหมาะสำหรับ สสอ./CUP ที่ต้องการระบบเต็มแบบอำเภอปากช่อง</p>
+            <div class="price-tag">ประเมินราคาตามจำนวนรายงานและระบบที่เชื่อมต่อ</div>
+            <ul class="price-list">
+              <li><svg class="icon"><use href="#i-check"/></svg> รายงานครบ 40 หมวด</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> KPI + Service Plan Analytics</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> Gap, Ranking, Quality Warning</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> Hybrid Snapshot + Live</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary btn-block">ขอใบเสนอราคา</a>
+          </article>
+
+          <article class="card price-card reveal">
+            <h3>Province / Network</h3>
+            <p class="price-desc">เหมาะสำหรับจังหวัดหรือเครือข่ายหลายอำเภอ</p>
+            <div class="price-tag">ออกแบบเฉพาะตามโครงสร้างพื้นที่</div>
+            <ul class="price-list">
+              <li><svg class="icon"><use href="#i-check"/></svg> รวมหลายอำเภอ/CUP</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> เปรียบเทียบข้ามพื้นที่</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> สิทธิ์การเข้าถึงแบบลำดับชั้น</li>
+            </ul>
+            <a href="#contact" class="btn btn-ghost btn-block">ขอใบเสนอราคา</a>
+          </article>
+
+          <article class="card price-card reveal">
+            <h3>Maintenance &amp; Support</h3>
+            <p class="price-desc">ดูแลระบบ อัปเดต Snapshot ตรวจสอบข้อมูล และปรับรายงานต่อเนื่อง</p>
+            <div class="price-tag">รายเดือนตามระดับบริการ</div>
+            <ul class="price-list">
+              <li><svg class="icon"><use href="#i-check"/></svg> อัปเดต Snapshot สม่ำเสมอ</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> ตรวจสอบคุณภาพข้อมูล</li>
+              <li><svg class="icon"><use href="#i-check"/></svg> ปรับ/เพิ่มรายงานต่อเนื่อง</li>
+            </ul>
+            <a href="#contact" class="btn btn-ghost btn-block">ขอใบเสนอราคา</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="section section-contact" id="contact">
+      <div class="container">
+        <div class="contact-card reveal">
+          <div class="contact-copy">
+            <span class="kicker">Contact</span>
+            <h2>เริ่มต้นเปลี่ยนข้อมูลสุขภาพให้เป็นระบบบริหารที่ใช้ได้จริง</h2>
+            <p>
+              หากหน่วยงานของท่านต้องการพัฒนาระบบ Health Data Intelligence, HDC Dashboard หรือ KPI Monitoring
+              เราพร้อมช่วยวิเคราะห์ปัญหา ออกแบบระบบ และพัฒนา Dashboard ที่เหมาะกับบริบทของพื้นที่
+            </p>
+            <a href="mailto:noaanoaa212224@gmail.com?subject=ปรึกษาโครงการ%20Health%20Data%20Intelligence" class="btn btn-primary">ออกแบบระบบ Health Data Intelligence</a>
+          </div>
+
+          <ul class="contact-list">
+            <li>
+              <span class="contact-ic"><svg class="icon"><use href="#i-mail"/></svg></span>
+              <span><span class="contact-label">Email</span>
+              <a href="mailto:noaanoaa212224@gmail.com">noaanoaa212224@gmail.com</a></span>
+            </li>
+            <li>
+              <span class="contact-ic"><svg class="icon"><use href="#i-chat"/></svg></span>
+              <span><span class="contact-label">Line</span>
+              <a href="https://line.me/ti/p/~kewthanapol" target="_blank" rel="noopener">kewthanapol</a></span>
+            </li>
+            <li>
+              <span class="contact-ic"><svg class="icon"><use href="#i-phone"/></svg></span>
+              <span><span class="contact-label">โทรศัพท์</span>
+              <a href="tel:0959075564">095-907-5564</a></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark sm" aria-hidden="true"><svg class="icon"><use href="#i-activity"/></svg></span>
+        <div>
+          <strong>Nexus Health Intelligence</strong>
+          <span>เน็กซัส เฮลท์ อินเทลลิเจนซ์ — ระบบอัจฉริยะเพื่อบริหารข้อมูลสุขภาพระดับพื้นที่</span>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="ลิงก์ส่วนท้าย">
+        <a href="#why">ทำไมต้อง Nexus</a>
+        <a href="#services">บริการ</a>
+        <a href="#case-study">Case Study</a>
+        <a href="#security">Data Security</a>
+        <a href="#pricing">แพ็กเกจ</a>
+        <a href="#contact">ติดต่อเรา</a>
+      </nav>
+      <p class="footer-note">
+        © <span id="year">2026</span> Nexus Health Intelligence · เว็บไซต์สาธิตองค์กร ·
+        ข้อมูลใน Dashboard เป็นตัวอย่างเพื่อการนำเสนอ ไม่มีข้อมูลผู้ป่วยรายบุคคล
+      </p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="to-top" aria-label="กลับขึ้นด้านบน" hidden>
+    <svg class="icon"><use href="#i-arrow-up"/></svg>
+  </button>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
